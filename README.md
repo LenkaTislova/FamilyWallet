@@ -1,5 +1,6 @@
 # familyWallet
 Lenka <>
+František <>
 
 ## Description
 
