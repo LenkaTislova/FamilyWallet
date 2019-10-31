@@ -1,0 +1,8 @@
+{
+    "name": "familyWallet",
+    "version": "0.0.1",
+    "description": "A game about how people handle their limited budget",
+    "author": "Lenka <>",
+    "license": "MIT/X11",
+    "homepage": "http://nodegame.org"
+}
