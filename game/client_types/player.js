@@ -46,18 +46,94 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         this.doneButton = node.widgets.append('DoneButton', header);
 
         // Additional debug information while developing the game.
-        // this.debugInfo = node.widgets.append('DebugInfo', header)
+        //this.debugInfo = node.widgets.append('DebugInfo', header)
+    });
+    
+    ////////////////////////////////////////////////////////////
+    // nodeGame hint: step propreties.
+    //
+    // A step is a set of properties under a common label (id).
+    //
+    // Properties are looked up with a cascade mechanism. That is,
+    // all steps inherit the properties defined at the stage level in
+    // which they are inserted. All stages inherit the properties
+    // defined at the game level. Finally, it fallbacks on nodeGame defaults.
+    //
+    // The property named `cb` is one of the most important.
+    //
+    // It defines the callback that will be called during the step.
+    // By default, each steps inherits an empty callback, so that
+    // it is not necessary to implement the cb property, if the
+    // player has, for example, only to read a text.
+    //
+    // To add/modify properties use the commands:
+    //
+    // `stager.extendStep`: modifies a step
+    // `stager.extendStage`: modifies a stage, and all enclosed steps
+    // `stager.setDefaultProperty`: modifies all stages and steps
+    //
+    ////////////////////////////////////////////////////////////   
+
+    // // // WARM UP!
+    stager.extendStage('warmUp', {
+        frame: 'warmUp.htm'
+    });
+
+    stager.extendStep('survey', {
+        frame: 'warmUp.htm'
+    });
+
+    stager.extendStep('roleTaking', {
+        frame: 'warmUp.htm'
     });
 
     stager.extendStep('instructions', {
         frame: 'instructions.htm'
     });
 
-    stager.extendStep('end', {
+	// // // WALLET!
+    stager.extendStage('wallet', {
+        frame: 'wallet.htm'
+    });
+
+    stager.extendStep('eventLottery', {
+        frame: 'wallet.htm'
+    });
+    
+    stager.extendStep('solvingEvents', {
+        frame: 'wallet.htm'
+    });
+
+    stager.extendStep('checkSolutionValidity', {
+        frame: 'wallet.htm'
+    });
+    
+    stager.extendStep('roundFeedBack', {
+        frame: 'wallet.htm'
+    });
+
+    stager.extendStep('roundFeeling', {
+        frame: 'wallet.htm'
+    });
+
+	// // // END!
+    stager.extendStage('end', {
         donebutton: false,
         frame: 'end.htm',
         cb: function() {
             node.game.visualTimer.setToZero();
         }
+    });
+
+    stager.extendStep('gameFeedBack', {
+        frame: 'end.htm'
+    });
+
+    stager.extendStep('gameFeeling', {
+        frame: 'end.htm'
+    });
+
+    stager.extendStep('comments', {
+        frame: 'end.htm'
     });
 };

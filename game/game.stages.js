@@ -28,7 +28,7 @@ module.exports = function(stager, settings) {
         .next('end')
         .step('gameFeedBack')
         .step('gameFeelings')
-        .step('comentaries')
+        .step('comments')
         .gameover();
 
     // Modify the stager to skip one stage.
