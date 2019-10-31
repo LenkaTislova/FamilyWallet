@@ -13,7 +13,12 @@
 
 "use strict";
 
+var ngc = require('nodegame-client');
+
 module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
+
+
+	//stager.setDefaultStepRule(ngc.stepRules.SOLO);
 
     stager.setOnInit(function() {
 
@@ -47,6 +52,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
         // Additional debug information while developing the game.
         //this.debugInfo = node.widgets.append('DebugInfo', header)
+        
+        
+        
+        
     });
     
     ////////////////////////////////////////////////////////////
@@ -117,10 +126,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
 	// // // END!
-    stager.extendStage('end', {
+    stager.extendStep('end', {
         donebutton: false,
         frame: 'end.htm',
-        cb: function() {
+        init: function() {
             node.game.visualTimer.setToZero();
         }
     });
@@ -134,6 +143,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     });
 
     stager.extendStep('comments', {
+		donebutton: false,
         frame: 'end.htm'
     });
 };

@@ -27,7 +27,7 @@ module.exports = function(stager, settings) {
         
         .next('end')
         .step('gameFeedBack')
-        .step('gameFeelings')
+        .step('gameFeeling')
         .step('comments')
         .gameover();
 
