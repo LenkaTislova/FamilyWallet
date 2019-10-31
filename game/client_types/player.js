@@ -13,7 +13,12 @@
 
 "use strict";
 
+var ngc = require('nodegame-client');
+
 module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
+
+
+	//stager.setDefaultStepRule(ngc.stepRules.SOLO);
 
     stager.setOnInit(function() {
 
@@ -46,78 +51,99 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
         this.doneButton = node.widgets.append('DoneButton', header);
 
         // Additional debug information while developing the game.
-        // this.debugInfo = node.widgets.append('DebugInfo', header)
+        //this.debugInfo = node.widgets.append('DebugInfo', header)
+        
+        
+        
+        
+    });
+    
+    ////////////////////////////////////////////////////////////
+    // nodeGame hint: step propreties.
+    //
+    // A step is a set of properties under a common label (id).
+    //
+    // Properties are looked up with a cascade mechanism. That is,
+    // all steps inherit the properties defined at the stage level in
+    // which they are inserted. All stages inherit the properties
+    // defined at the game level. Finally, it fallbacks on nodeGame defaults.
+    //
+    // The property named `cb` is one of the most important.
+    //
+    // It defines the callback that will be called during the step.
+    // By default, each steps inherits an empty callback, so that
+    // it is not necessary to implement the cb property, if the
+    // player has, for example, only to read a text.
+    //
+    // To add/modify properties use the commands:
+    //
+    // `stager.extendStep`: modifies a step
+    // `stager.extendStage`: modifies a stage, and all enclosed steps
+    // `stager.setDefaultProperty`: modifies all stages and steps
+    //
+    ////////////////////////////////////////////////////////////   
+
+    // // // WARM UP!
+    stager.extendStage('warmUp', {
+        frame: 'warmUp.htm'
+    });
+
+    stager.extendStep('survey', {
+        frame: 'warmUp.htm'
+    });
+
+    stager.extendStep('roleTaking', {
+        frame: 'warmUp.htm'
     });
 
     stager.extendStep('instructions', {
         frame: 'instructions.htm'
     });
 
-    stager.extendStep('game', {
-        donebutton: false,
-        frame: 'game.htm',
-        roles: {
-            DICTATOR: {
-                timer: settings.bidTime,
-                cb: function() {
-                    var button, offer, div;
-
-                    // Make the dictator display visible.
-                    div = W.getElementById('dictator').style.display = '';
-                    button = W.getElementById('submitOffer');
-                    offer =  W.getElementById('offer');
-
-                    // Listen on click event.
-                    button.onclick = function() {
-                        var decision;
-
-                        // Validate offer.
-                        decision = node.game.isValidBid(offer.value);
-                        if ('number' !== typeof decision) {
-                            W.writeln('Please enter a number between ' +
-                                      '0 and 100.', 'dictator');
-                            return;
-                        }
-                        button.disabled = true;
-
-                        // Mark the end of the round, and
-                        // store the decision in the server.
-                        node.done({ offer: decision });
-                    };
-                },
-                timeup: function() {
-                    node.game.randomOffer(W.getElementById('offer'),
-                                          W.getElementById('submitOffer'));
-                }
-            },
-            OBSERVER: {
-                cb: function() {
-                    var span, div, dotsObj;
-
-                    // Make the observer display visible.
-                    div = W.getElementById('observer').style.display = '';
-                    span = W.getElementById('dots');
-                    dotsObj = W.addLoadingDots(span);
-
-                    node.on.data('decision', function(msg) {
-                        dotsObj.stop();
-                        W.setInnerHTML('waitingFor', 'Decision arrived: ');
-                        W.setInnerHTML('decision',
-                                       'The dictator offered: ' +
-                                       msg.data + ' ECU.');
-
-                        node.timer.randomDone();
-                    });
-                }
-            }
-        }
+	// // // WALLET!
+    stager.extendStage('wallet', {
+        frame: 'wallet.htm'
     });
 
+    stager.extendStep('eventLottery', {
+        frame: 'wallet.htm'
+    });
+    
+    stager.extendStep('solvingEvents', {
+        frame: 'wallet.htm'
+    });
+
+    stager.extendStep('checkSolutionValidity', {
+        frame: 'wallet.htm'
+    });
+    
+    stager.extendStep('roundFeedBack', {
+        frame: 'wallet.htm'
+    });
+
+    stager.extendStep('roundFeeling', {
+        frame: 'wallet.htm'
+    });
+
+	// // // END!
     stager.extendStep('end', {
         donebutton: false,
         frame: 'end.htm',
-        cb: function() {
+        init: function() {
             node.game.visualTimer.setToZero();
         }
+    });
+
+    stager.extendStep('gameFeedBack', {
+        frame: 'end.htm'
+    });
+
+    stager.extendStep('gameFeeling', {
+        frame: 'end.htm'
+    });
+
+    stager.extendStep('comments', {
+		donebutton: false,
+        frame: 'end.htm'
     });
 };

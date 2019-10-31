@@ -12,9 +12,23 @@
 module.exports = function(stager, settings) {
 
      stager
-        .next('instructions')
-        .repeat('game', settings.REPEAT)
+        // This is warmUp phase of the code 
+        .next('warmUp')
+        .step('survey')
+        .step('roleTaking')
+        .step('instructions')
+        
+        .repeat('wallet', settings.REPEAT)
+        .step('eventLottery')
+        .step('solvingEvents')
+        .step('checkSolutionValidity')
+        .step('roundFeedBack')
+        .step('roundFeeling')
+        
         .next('end')
+        .step('gameFeedBack')
+        .step('gameFeeling')
+        .step('comments')
         .gameover();
 
     // Modify the stager to skip one stage.
