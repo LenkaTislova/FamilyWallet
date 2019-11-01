@@ -131,7 +131,10 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 
 
     stager.extendStep('eventLottery', {
-        frame: 'wallet.htm'
+        frame: 'wallet.htm',
+        cb: function() {
+			node.done();
+		}
     });
     
     stager.extendStep('solvingEvents', {
