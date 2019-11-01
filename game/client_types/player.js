@@ -111,7 +111,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 		id: 'Grandma', 
 		forms: [
 					{
-						id: 'Otázka 1',
+						id: 'otazka01',
 						name: 'ChoiceTable',
 						mainText: 'Babička nechce, aby se o ní starala její vlastní dcera, přijde si na obtíž a tak…',
 						requiredChoice: 1,
@@ -120,7 +120,7 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
 						choices: ['půjde do stacionáře, který ale stojí hodně peněz -3000,-', 'zůstane u své dcery, která si bude muset vzít neplacené volno a přijde o hodně peněz -3000,-', 'poprosí svého vnuka, aby se o ní staral, aby matka mohla chodit do práce. 0,-']
 					},
 					{
-						id: 'Otázka 2',
+						id: 'otazka02',
 						name: 'ChoiceTable',
 						mainText: 'Babička se dostane do situace, kdy si rozbije své brýle',
 						requiredChoice: 1,
