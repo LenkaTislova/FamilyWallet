@@ -104,6 +104,33 @@ module.exports = function(treatmentName, settings, stager, setup, gameRoom) {
     stager.extendStage('wallet', {
         frame: 'wallet.htm'
     });
+    
+    
+    //Tady bude babička 
+	var Babicka = {
+		id: 'Grandma', 
+		forms: [
+					{
+						id: 'Otázka 1',
+						name: 'ChoiceTable',
+						mainText: 'Babička nechce, aby se o ní starala její vlastní dcera, přijde si na obtíž a tak…',
+						requiredChoice: 1,
+						selectMultiple: 1, 
+						// orientation: 'v',
+						choices: ['půjde do stacionáře, který ale stojí hodně peněz -3000,-', 'zůstane u své dcery, která si bude muset vzít neplacené volno a přijde o hodně peněz -3000,-', 'poprosí svého vnuka, aby se o ní staral, aby matka mohla chodit do práce. 0,-']
+					},
+					{
+						id: 'Otázka 2',
+						name: 'ChoiceTable',
+						mainText: 'Babička se dostane do situace, kdy si rozbije své brýle',
+						requiredChoice: 1,
+						selectMultiple: 1, 
+						// orientation: 'v',
+						choices: ['pořídí si nové a zaplatí si je sama -1500,-', 'požádá dceru o finanční pomoc na nové brýle -750,-', 'půjčí si na ně v bance a po dobu tří měsíců bude splácet -500 x 3,-']
+					}
+				]
+			};
+
 
     stager.extendStep('eventLottery', {
         frame: 'wallet.htm'
