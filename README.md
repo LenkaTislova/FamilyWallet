@@ -1,6 +1,9 @@
 # familyWallet
 Lenka <tislova.lenka@gmail.com>
 František <kalvas@kss.zcu.cz>
+Tereza <>
+Karolina <>
+Karin <>
 
 ## Description
 
