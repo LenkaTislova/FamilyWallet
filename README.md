@@ -1,5 +1,5 @@
 # familyWallet
-Lenka <>
+Lenka <tislova.lenka@gmail.com>
 František <kalvas@kss.zcu.cz>
 
 ## Description
